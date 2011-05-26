@@ -25,7 +25,7 @@ class Hash
           if option_k == "bounds" #particular case
             result << "Gmaps4Rails.map_options.#{option_k} = #{option_v};"
           else
-          result << "Gmaps4Rails.map_options.#{option_k} = #{Gmaps4rails.filter option_v};"
+            result << "Gmaps4Rails.map_options.#{option_k} = #{Gmaps4rails.filter option_v};"
           end
         end
       end
@@ -59,7 +59,7 @@ class Hash
     	  content["options"].each do |option_k, option_v|
     	    result << "Gmaps4Rails.#{category}_conf.#{option_k} = #{Gmaps4rails.filter option_v};"		
     		end
-    	    result << "Gmaps4Rails.create_#{category}();"
+        result << "Gmaps4Rails.create_#{category}();"
     	end 
     end
     result << "if(typeof gmaps4rails_callback == 'function') { gmaps4rails_callback(); }"
