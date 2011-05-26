@@ -35,11 +35,11 @@ describe "Acts as gmappable" do
   
     it "should render a valid json from an array of ojects" do
       @user2 = Factory(:user_paris)
-      User.all.to_gmaps4rails.should == "[{\"description\": \"My Beautiful Name: me\", \"longitude\": \"5.9311119\", \"latitude\": \"43.1251606\"},\n{\"description\": \"My Beautiful Name: me\", \"longitude\": \"2.3509871\", \"latitude\": \"48.8566667\"}]"
+      User.all.to_gmaps4rails.should == %Q<[{"description": "My Beautiful Name: me", "longitude": "5.9311119", "latitude": "43.1251606"},\n{"description": "My Beautiful Name: me", "longitude": "2.3509871", "latitude": "48.8566667"}]>
     end
   
     it "should render a valid json from a single object" do
-      @user.to_gmaps4rails.should == "[{\"description\": \"My Beautiful Name: me\", \"longitude\": \"5.9311119\", \"latitude\": \"43.1251606\"}]"
+      @user.to_gmaps4rails.should == %Q<[{"description": "My Beautiful Name: me", "longitude": "5.9311119", "latitude": "43.1251606"}]>
     end
     
     it "should not geocode again after address changes if checker is true" do
@@ -259,7 +259,7 @@ describe "Acts as gmappable" do
           "My Beautiful Picture: #{picture}"
         end
       end
-      @user.to_gmaps4rails.should == "[{\"description\": \"My Beautiful Picture: http://www.blankdots.com/img/github-32x32.png\", \"longitude\": \"5.9311119\", \"latitude\": \"43.1251606\"}]"
+      @user.to_gmaps4rails.should == %Q<[{"description": "My Beautiful Picture: http://www.blankdots.com/img/github-32x32.png", "longitude": "5.9311119", "latitude": "43.1251606"}]>
     end
     
     it "should take into account the picture provided in the model" do
@@ -273,7 +273,7 @@ describe "Acts as gmappable" do
           }
         end
       end
-      @user.to_gmaps4rails.should == "[{\"description\": \"My Beautiful Name: me\", \"longitude\": \"5.9311119\", \"latitude\": \"43.1251606\", \"picture\": \"http://www.blankdots.com/img/github-32x32.png\", \"width\": \"32\", \"height\": \"32\"}]"
+      @user.to_gmaps4rails.should == %Q<[{"description": "My Beautiful Name: me", "longitude": "5.9311119", "latitude": "43.1251606", "picture": "http://www.blankdots.com/img/github-32x32.png", "width": "32", "height": "32"}]>
     end
     
     it "should take into account the title provided in the model" do
@@ -283,7 +283,7 @@ describe "Acts as gmappable" do
           "Sweet Title"
         end
       end
-      @user.to_gmaps4rails.should == "[{\"description\": \"My Beautiful Name: me\", \"title\": \"Sweet Title\", \"longitude\": \"5.9311119\", \"latitude\": \"43.1251606\"}]"
+      @user.to_gmaps4rails.should == %Q<[{"description": "My Beautiful Name: me", "title": "Sweet Title", "longitude": "5.9311119", "latitude": "43.1251606"}]>
     end
     
     it "should take into account the sidebar content provided in the model" do
@@ -293,7 +293,7 @@ describe "Acts as gmappable" do
           "sidebar content"
         end
       end
-      @user.to_gmaps4rails.should == "[{\"description\": \"My Beautiful Name: me\", \"sidebar\": \"sidebar content\",\"longitude\": \"5.9311119\", \"latitude\": \"43.1251606\"}]"
+      @user.to_gmaps4rails.should == %Q<[{"description": "My Beautiful Name: me", "sidebar": "sidebar content","longitude": "5.9311119", "latitude": "43.1251606"}]>
     end
     
     it "should take into account all additional data provided in the model" do
@@ -320,7 +320,7 @@ describe "Acts as gmappable" do
           "sidebar content"
         end
       end
-      @user.to_gmaps4rails.should == "[{\"description\": \"My Beautiful Picture: \", \"title\": \"Sweet Title\", \"sidebar\": \"sidebar content\",\"longitude\": \"5.9311119\", \"latitude\": \"43.1251606\", \"picture\": \"http://www.blankdots.com/img/github-32x32.png\", \"width\": \"32\", \"height\": \"32\"}]"
+      @user.to_gmaps4rails.should == %Q<[{"description": "My Beautiful Picture: ", "title": "Sweet Title", "sidebar": "sidebar content","longitude": "5.9311119", "latitude": "43.1251606", "picture": "http://www.blankdots.com/img/github-32x32.png", "width": "32", "height": "32"}]>
     end
   end
 
