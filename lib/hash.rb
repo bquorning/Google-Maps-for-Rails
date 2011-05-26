@@ -43,9 +43,8 @@ class Hash
         content["options"] ||= Array.new 
     	  content["options"].each do |option_k, option_v| 
           if option_k == "waypoints"
-            waypoints = Array.new
-    				option_v.each do |waypoint|
-    				  waypoints << { "location" => waypoint, "stopover" => true }.to_json
+            waypoints = option_v.collect do |waypoint|
+              { "location" => waypoint, "stopover" => true }.to_json
     				end
     	      result << "Gmaps4Rails.direction_conf.waypoints = [#{waypoints * (",")}];"
           else #option_k != "waypoint"
@@ -63,7 +62,6 @@ class Hash
     	end 
     end
     result << "if(typeof gmaps4rails_callback == 'function') { gmaps4rails_callback(); }"
-    result * ('
-')
+    result.join "\n"
   end
 end
